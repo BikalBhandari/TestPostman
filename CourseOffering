@@ -1,0 +1,14 @@
+bodyData = JSON.parse(responseBody);
+var value = bodyData.filter(CourseOfferingID =>
+  CourseOfferingID.Course_ID__c == "LDR-501S" &&
+  CourseOfferingID.hed__Term__c == "a0Ne000001o16HcEAI"
+)[0].Id;
+console.log(value)
+pm.environment.set("CourseOffering", value);
+// Test Results message
+if(responseCode.code != 200) {
+    tests["TEST FAILED - Expected ResponseCode Status = 200 . ResponseCode received = " + responseCode.code] = responseCode.code === 200;
+}
+else {
+    tests["TEST PASSED - Course Offering ID set as environment Variable && ResponseCode Status received = " + responseCode.code] = responseCode.code === 200;
+}
